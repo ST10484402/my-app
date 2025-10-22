@@ -11,3 +11,4 @@ You then must open an intergrated terminal in the app.tsx file, if you are runni
 https://youtube.com/shorts/u1WuZQF69kM?si=N-SMDzPQqCoa03DE
 
 # Github Link
+https://github.com/ST10484402/my-app
