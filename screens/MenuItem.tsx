@@ -1,17 +1,34 @@
-// components/MenuItem.tsx
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const MenuItem = ({ item, mealItems, setMealItems }: any) => {
+interface MealItem {
+  id: number;
+  course: 'Starters' | 'Main Course' | 'Dessert';
+  name: string;
+  description: string;
+  price: number;
+}
+
+// Props that MenuItem will receive
+interface MenuItemProps {
+  item: MealItem;
+  mealItems: MealItem[];
+  setMealItems: React.Dispatch<React.SetStateAction<MealItem[]>>; // Function to update the meal Items state
+}
+
+const MenuItem = ({ item, mealItems, setMealItems }: MenuItemProps) => {
+  console.log("MenuItem Props:", { item, mealItems });
+
   const handleRemoveItem = () => {
-    setMealItems(mealItems.filter((i: any) => i.id !== item.id));
+    setMealItems(mealItems.filter((i) => i.id !== item.id)); // Removing item from the mealItems array
   };
 
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemName}>{item.name}</Text>
       <Text>{item.description}</Text>
-      <Text>R{item.price.toFixed(2)}</Text>
+      {/* Adding a check to ensure price is a number */}
+      <Text>{typeof item.price === 'number' ? `R${item.price.toFixed(2)}` : 'Invalid Price'}</Text>
 
       <TouchableOpacity style={styles.removeButton} onPress={handleRemoveItem}>
         <Text style={styles.removeButtonText}>Remove</Text>

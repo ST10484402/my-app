@@ -5,28 +5,28 @@ const FilterMenuScreen = ({ route }: any) => {
   const { mealItems } = route.params;
   const [filter, setFilter] = useState('All');
 
-  const filteredItems = filter === 'All' ? mealItems : mealItems.filter((item: { course: string; }) => item.course === filter);
+  const filteredItems = filter === 'All' ? mealItems : mealItems.filter((item: { course: string }) => item.course === filter);
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Filter Menu by Course</Text>
 
-      <View style={styles.buttonContainer}>
+      <View style={styles.filterButtons}>
         {['All', 'Starters', 'Main Course', 'Dessert'].map(course => (
           <TouchableOpacity
             key={course}
-            style={[styles.button, filter === course && styles.selectedButton]}
+            style={[styles.filterButton, filter === course && styles.selectedFilter]}
             onPress={() => setFilter(course)}
           >
-            <Text style={styles.buttonText}>{course}</Text>
+            <Text style={styles.filterButtonText}>{course}</Text>
           </TouchableOpacity>
         ))}
       </View>
 
       <ScrollView>
-        {filteredItems.map((item: { id: React.Key | null | undefined; name: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; description: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; price: number; }) => (
-          <View key={item.id} style={styles.itemRow}>
-            <Text style={styles.itemName}>{item.name}</Text>
+        {filteredItems.map((item: any) => (
+          <View key={item.id} style={styles.itemContainer}>
+            <Text>{item.name}</Text>
             <Text>{item.description}</Text>
             <Text>R{item.price.toFixed(2)}</Text>
           </View>
@@ -46,28 +46,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  buttonContainer: {
+  filterButtons: {
     flexDirection: 'row',
     marginBottom: 20,
   },
-  button: {
+  filterButton: {
     padding: 10,
     margin: 5,
     borderWidth: 1,
     borderRadius: 5,
   },
-  selectedButton: {
+  selectedFilter: {
     backgroundColor: '#3498db',
   },
-  buttonText: {
+  filterButtonText: {
     color: '#333',
   },
-  itemRow: {
+  itemContainer: {
     marginBottom: 15,
-  },
-  itemName: {
-    fontWeight: 'bold',
-    fontSize: 16,
   },
 });
 

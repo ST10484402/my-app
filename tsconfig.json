@@ -11,6 +11,11 @@
   },
   "include": [
     "src/**/*",
+    "App.tsx",
+    "index.ts",
+    "index.tsx",
+    "index.js",
+    "**/*.{ts,tsx,js,jsx}",
     "node_modules/@types/react-native/index.d.ts"
   ],
   "exclude": [

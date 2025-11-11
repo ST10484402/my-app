@@ -1,21 +1,50 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+
+type Course = 'Starters' | 'Main Course' | 'Dessert';
+
+interface MealItem {
+  id: number;
+  course: Course;
+  name: string;
+  description: string;
+  price: number;
+}
+
+const COURSE_OPTIONS = ['Starters', 'Main Course', 'Dessert'] as const;
 
 const AddItemScreen = ({ route, navigation }: any) => {
-  const { setMealItems } = route.params;
+  const [course, setCourse] = useState<Course>('Main Course');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [course, setCourse] = useState('Main Course');
+
+  // optional setter passed via route params
+  const setMealItems = route?.params?.setMealItems;
+
   const handleSaveItem = () => {
-    const newItem = {
+    if (!name || !description || !price) {
+      Alert.alert('Please fill all the fields');
+      return;
+    }
+    
+    const newItem: MealItem = {
       id: Date.now(),
       name,
       description,
       price: parseFloat(price),
       course,
     };
-    setMealItems((prevItems: any) => [...prevItems, newItem]);
+
+    // If a setter was provided via route params, use it; otherwise warn or pass back via navigation
+    if (typeof setMealItems === 'function') {
+      setMealItems((prevItems: MealItem[]) => [...prevItems, newItem]);
+    } else {
+      // fallback: you can pass the new item back to a parent or another screen if needed
+      // navigation.navigate('Menu', { newItem });
+      console.warn('setMealItems not provided via route.params');
+    }
+
     navigation.goBack();
   };
 
@@ -23,13 +52,33 @@ const AddItemScreen = ({ route, navigation }: any) => {
     <View style={styles.container}>
       <Text style={styles.header}>Add New Menu Item</Text>
 
-      <TextInput style={styles.input} placeholder="Item Name" value={name} onChangeText={setName} />
-      <TextInput style={styles.input} placeholder="Description" value={description} onChangeText={setDescription} />
-      <TextInput style={styles.input} placeholder="Price" keyboardType="numeric" value={price} onChangeText={setPrice} />
-      
+      <TextInput
+        style={styles.input}
+        placeholder="Item Name"
+        value={name}
+        onChangeText={setName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Description"
+        value={description}
+        onChangeText={setDescription}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Price"
+        keyboardType="numeric"
+        value={price}
+        onChangeText={setPrice}
+      />
+
       <View style={styles.courseSelector}>
-        {['Starters', 'Main Course', 'Dessert'].map(courseOption => (
-          <TouchableOpacity key={courseOption} style={[styles.courseButton, course === courseOption && styles.selected]} onPress={() => setCourse(courseOption)}>
+        {COURSE_OPTIONS.map(courseOption => (
+          <TouchableOpacity
+            key={courseOption}
+            style={[styles.courseButton, course === courseOption && styles.selected]}
+            onPress={() => setCourse(courseOption as Course)}
+          >
             <Text style={styles.courseButtonText}>{courseOption}</Text>
           </TouchableOpacity>
         ))}
