@@ -1,8 +1,7 @@
-// screens/HomeScreen.tsx
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import MenuItem from '../components/MenuItem';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import MenuItem from '../screens/MenuItem';
 
 interface MealItem {
   id: number;
@@ -12,9 +11,15 @@ interface MealItem {
   price: number;
 }
 
-const HomeScreen = ({ route }: any) => {
-  const navigation = useNavigation();
-  const [mealItems, setMealItems] = useState<MealItem[]>(route.params?.mealItems || []);
+type RootStackParamList = {
+  Home?: { mealItems?: MealItem[] } | undefined;
+  'Add Item': { setMealItems: React.Dispatch<React.SetStateAction<MealItem[]>> };
+  'Filter Menu': { mealItems: MealItem[] };
+};
+
+const HomeScreen = ({ route }: { route?: { params?: RootStackParamList['Home'] } }) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList, 'Home'>>();
+  const [mealItems, setMealItems] = useState<MealItem[]>(route?.params?.mealItems || []);
 
   const calculateAveragePrice = (course: string) => {
     const filteredItems = mealItems.filter(item => item.course === course);

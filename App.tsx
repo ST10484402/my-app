@@ -1,10 +1,25 @@
-// App.tsx
 import React from 'react';
+import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './screens/HomeScreen';
-import AddItemScreen from './screens/AddItemScreen';
-import FilterMenuScreen from './screens/FilterMenuScreen';
+
+const HomeScreen: React.FC<any> = ({ navigation }) => (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>Home Screen</Text>
+  </View>
+);
+
+const AddItemScreen: React.FC<any> = ({ navigation }) => (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>Add Item Screen</Text>
+  </View>
+);
+
+const FilterMenuScreen: React.FC<any> = ({ navigation }) => (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>Filter Menu Screen</Text>
+  </View>
+);
 
 const Stack = createStackNavigator();
 

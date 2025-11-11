@@ -1,4 +1,3 @@
-// screens/FilterMenuScreen.tsx
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 
@@ -6,7 +5,7 @@ const FilterMenuScreen = ({ route }: any) => {
   const { mealItems } = route.params;
   const [filter, setFilter] = useState('All');
 
-  const filteredItems = filter === 'All' ? mealItems : mealItems.filter(item => item.course === filter);
+  const filteredItems = filter === 'All' ? mealItems : mealItems.filter((item: { course: string; }) => item.course === filter);
 
   return (
     <View style={styles.container}>
@@ -25,7 +24,7 @@ const FilterMenuScreen = ({ route }: any) => {
       </View>
 
       <ScrollView>
-        {filteredItems.map(item => (
+        {filteredItems.map((item: { id: React.Key | null | undefined; name: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; description: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; price: number; }) => (
           <View key={item.id} style={styles.itemRow}>
             <Text style={styles.itemName}>{item.name}</Text>
             <Text>{item.description}</Text>

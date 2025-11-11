@@ -1,16 +1,12 @@
-// screens/AddItemScreen.tsx
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-const AddItemScreen = ({ route }: any) => {
+const AddItemScreen = ({ route, navigation }: any) => {
   const { setMealItems } = route.params;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [course, setCourse] = useState('Main Course');
-  const navigation = useNavigation();
-
   const handleSaveItem = () => {
     const newItem = {
       id: Date.now(),
