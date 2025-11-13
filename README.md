@@ -65,6 +65,16 @@ The `AddItemScreen` component allows users to add a new item to the menu by prov
 - Validations ensure that the dish name, price, and category are entered before saving the item.
 - The user can cancel or save the new item.
 
+# Changelog
+
+- Initial Release: Created the AddItemScreen component.
+- Added input fields for dish name, description, price, and category.
+- Implemented category dropdown menu to select item category.
+- Validated input to ensure dish name, price, and category are provided before submission.
+- Added save and cancel actions.
+- Dismisses the keyboard when tapping outside input fields.
+- Styled the component for a clean and user-friendly interface.
+
 # Youtube video link
 https://youtube.com/shorts/u1WuZQF69kM?si=N-SMDzPQqCoa03DE
 
