@@ -54,6 +54,16 @@ You then must open an intergrated terminal in the app.tsx file, if you are runni
 - Add Item Screen
 - The user can add a new menu item by entering the dish name, description, price, and selecting a category.
 
+# Add Item Screen
+
+The `AddItemScreen` component allows users to add a new item to the menu by providing details such as the dish name, description, price, and category. The category is selected from a dropdown menu. This screen is part of a larger menu management system in a React Native app.
+
+## Features
+
+- Users can add a new dish by entering the dish name, description, and price.
+- A dropdown menu is used to select a category for the dish.
+- Validations ensure that the dish name, price, and category are entered before saving the item.
+- The user can cancel or save the new item.
 
 # Youtube video link
 https://youtube.com/shorts/u1WuZQF69kM?si=N-SMDzPQqCoa03DE
